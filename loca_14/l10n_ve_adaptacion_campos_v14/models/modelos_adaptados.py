@@ -27,12 +27,20 @@ class AccountMove(models.Model):
 
     invoice_payment_state = fields.Char()
     type_aux = fields.Char(compute='_compute_move_type')
+    asiento_retencion = fields.Boolean(default=False)
     type = fields.Char()
+
+        
 
     @api.depends('move_type')
     def _compute_move_type(self):
         self.type_aux=self.move_type
         self.type=self.move_type
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    asiento_retencion = fields.Boolean(default=False)
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

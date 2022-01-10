@@ -152,7 +152,7 @@ class RetentionVat(models.Model):
         valor_aux=0
         #raise UserError(_('moneda compañia: %s')%self.company_id.currency_id.id)
         if self.invoice_id.currency_id.id!=self.invoice_id.company_id.currency_id.id:
-            tasa= self.env['res.currency.rate'].search([('currency_id','=',self.invoice_id.currency_id.id),('name','<=',self.invoice_id.date)],order="name asc")
+            tasa= self.env['res.currency.rate'].search([('currency_id','=',self.invoice_id.currency_id.id),('name','<=',self.invoice_id.invoice_date)],order="name asc")
             for det_tasa in tasa:
                 if fecha_contable_doc>=det_tasa.name:
                     valor_aux=det_tasa.rate
@@ -171,7 +171,7 @@ class RetentionVat(models.Model):
         if self.invoice_id.type=="in_invoice" or self.invoice_id.type=="in_receipt":
             signed_amount_total=self.total_ret() #self.conv_div_extranjera(self.total_ret()) #self.vat_retentioned
         if self.type=="out_invoice" or self.type=="out_receipt":
-            signed_amount_total=-1*self.total_ret() #self.conv_div_extranjera(self.total_ret()) #(-1*self.vat_retentioned)
+            signed_amount_total=-1*self.self.total_ret() #self.conv_div_extranjera(self.total_ret()) #(-1*self.vat_retentioned)
 
         if self.invoice_id.type=="out_invoice" or self.invoice_id.type=="out_refund" or self.invoice_id.type=="out_receipt":
             id_journal=self.partner_id.sale_isrl_id.id
@@ -190,6 +190,8 @@ class RetentionVat(models.Model):
         value = {
             'name': name,
             'date': self.invoice_id.date,#listo
+            'invoice_date':self.move_id.invoice_date,
+            'asiento_retencion':True,
             #'amount_total':self.vat_retentioned,# LISTO
             'partner_id': self.partner_id.id, #LISTO
             'journal_id':id_journal,

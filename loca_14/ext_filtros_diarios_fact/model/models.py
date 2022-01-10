@@ -4,7 +4,6 @@ import logging
 from datetime import datetime
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-from collections import defaultdict
 
 
 _logger = logging.getLogger('__name__')
@@ -13,8 +12,6 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     journal_aux_id = fields.Many2one('account.journal', string='Diario Aux',compute='_compute_invoice_filter_type_doc')   
-
-    journal_id = fields.Many2one('account.journal', string='Journal', required=True, readonly=True)
 
     @api.depends('type')
     def _compute_invoice_filter_type_doc(self):
@@ -58,5 +55,3 @@ class AccountMove(models.Model):
                 file=det.id
             self.journal_aux_id=file
         #self.invoice_filter_type_doc= file
-
-   
