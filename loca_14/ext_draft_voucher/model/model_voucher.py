@@ -169,12 +169,7 @@ class RetentionVat(models.Model):
                     name_asiento=det_history.nro_asiento_islr
             #raise UserError(_('name_asiento = %s')%name_asiento)
 
-            id_move=self.registro_movimiento_retencion(name_asiento)
-            idv_move=id_move.id
-            valor=self.registro_movimiento_linea_retencion(idv_move,name_asiento)
-            moves= self.env['account.move'].search([('id','=',idv_move)])
-            ###moves.filtered(lambda move: move.journal_id.post_at != 'bank_rec').post()
-            moves._post(soft=False)        
+                  
 
             
         else :
