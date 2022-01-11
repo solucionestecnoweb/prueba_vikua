@@ -209,7 +209,7 @@ class RetentionVat(models.Model):
         return move_id
 
     def registro_movimiento_linea_retencion(self,id_movv,consecutivo_asiento):
-        #raise UserError(_('ID MOVE = %s')%id_movv)
+        raise UserError(_('mama = %s')%id_movv)
         name = consecutivo_asiento
         valores = self.total_ret() #self.conv_div_extranjera(self.total_ret()) #self.vat_retentioned #VALIDAR CONDICION
         cero = 0.0

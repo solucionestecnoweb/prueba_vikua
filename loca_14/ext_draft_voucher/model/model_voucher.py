@@ -174,7 +174,7 @@ class RetentionVat(models.Model):
             valor=self.registro_movimiento_linea_retencion(idv_move,name_asiento)
             moves= self.env['account.move'].search([('id','=',idv_move)])
             ###moves.filtered(lambda move: move.journal_id.post_at != 'bank_rec').post()
-            #moves._post(soft=False)        
+            moves._post(soft=False)        
 
             
         else :
