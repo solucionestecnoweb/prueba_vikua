@@ -20,9 +20,8 @@ class AccountMove(models.Model):
         bann=0
         bann=self.verifica_exento_islr()
         if bann>0:
-            pass
-            #self.create_retention()
-            #self.unifica_alicuota_iguales_islr()
+            self.create_retention()
+            ##self.unifica_alicuota_iguales_islr()
 
     def unifica_alicuota_iguales_islr(self):
         lista_impuesto = self.env['islr.rates'].search([('code','!=','000')])
@@ -114,9 +113,9 @@ class AccountMove(models.Model):
                     else :
                         raise UserError("the Partner does not have identified the type of person.")
 
-        if self.type =='in_invoice' or self.type =='in_refund' or self.type =='in_receipt':
-            if active==True:
-                self.isrl_ret_id.action_post()
+        ##if self.type =='in_invoice' or self.type =='in_refund' or self.type =='in_receipt':
+            ##if active==True:
+                ##self.isrl_ret_id.action_post()
 
 
     def conv_div_nac(self,valor):
