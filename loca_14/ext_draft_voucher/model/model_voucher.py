@@ -139,7 +139,7 @@ class RetentionVat(models.Model):
 
     def ejecuta(self):
         #super().action_post()
-        #raise UserError(_('fact id = %s')%self.invoice_id.id)
+        raise UserError(_('fact id = %s')%self.invoice_id.id)
         id_factura=self.invoice_id.id
         customer = ('out_invoice','out_refund','out_receipt')
         vendor   = ('in_invoice','in_refund','in_receipt')
