@@ -213,7 +213,7 @@ class RetentionVat(models.Model):
         name = consecutivo_asiento
         valores = self.total_ret() #self.conv_div_extranjera(self.total_ret()) #self.vat_retentioned #VALIDAR CONDICION
         cero = 0.0
-        #raise UserError(_('valores = %s')%valores)
+        raise UserError(_('valores = %s')%valores)
         if self.invoice_id.type=="out_invoice" or self.invoice_id.type=="out_refund" or self.invoice_id.type=="out_receipt":
             cuenta_ret_cliente=self.partner_id.account_isrl_receivable_id.id# cuenta retencion cliente
             cuenta_ret_proveedor=self.partner_id.account_isrl_payable_id.id#cuenta retencion proveedores
