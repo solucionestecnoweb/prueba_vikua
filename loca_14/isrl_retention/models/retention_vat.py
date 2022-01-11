@@ -103,7 +103,7 @@ class RetentionVat(models.Model):
 
 
     def ejecuta(self):
-        raise UserError(_('moneda compañia'))
+        #raise UserError(_('moneda compañia'))
         customer = ('out_invoice','out_refund','out_receipt')
         vendor   = ('in_invoice','in_refund','in_receipt')
         #name_asiento = self.env['ir.sequence'].next_by_code('purchase.isrl.retention.account')
