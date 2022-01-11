@@ -103,7 +103,7 @@ class RetentionVat(models.Model):
 
 
     def ejecuta(self):
-        #raise UserError(_('moneda compañia'))
+        raise UserError(_('moneda compañia'))
         customer = ('out_invoice','out_refund','out_receipt')
         vendor   = ('in_invoice','in_refund','in_receipt')
         #name_asiento = self.env['ir.sequence'].next_by_code('purchase.isrl.retention.account')
@@ -115,7 +115,12 @@ class RetentionVat(models.Model):
             else:
                 pass
             ##self.move_id.action_post() # DARRELL
-            
+            name_asiento = self.env['ir.sequence'].next_by_code('purchase.isrl.retention.account')
+            id_move=self.registro_movimiento_retencion(name_asiento)
+            idv_move=id_move.id
+            valor=self.registro_movimiento_linea_retencion(idv_move,name_asiento)
+            moves= self.env['account.move'].search([('id','=',idv_move)])
+            moves._post(soft=False)
             ##moves.filtered(lambda move: move.journal_id.post_at != 'bank_rec').post()
 
     def total_ret(self):
