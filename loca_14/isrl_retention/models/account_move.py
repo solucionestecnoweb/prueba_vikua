@@ -20,8 +20,9 @@ class AccountMove(models.Model):
         bann=0
         bann=self.verifica_exento_islr()
         if bann>0:
-            self.create_retention()
-            self.unifica_alicuota_iguales_islr()
+            pass
+            #self.create_retention()
+            #self.unifica_alicuota_iguales_islr()
 
     def unifica_alicuota_iguales_islr(self):
         lista_impuesto = self.env['islr.rates'].search([('code','!=','000')])
